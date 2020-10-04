@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import "./members/grid.scss";
+
+* {
+    box-sizing: border-box;
+    outline: none;
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+body, html, #root, .app {
+    width: 100%;
+    height: 100%;
+}
+
+$green-color: #51A769;
+$green-color-alpha: transparentize($green-color, .6);
+$blue-color: #3476f1;
+$blue-color-alpha: transparentize($blue-color, .6);
+$red-color: #f1345d;
+$red-color-alpha: transparentize($red-color, .6);
+$purple-color: #9c34f1;
+$purple-color-alpha: transparentize($purple-color, .6);
+
+$base-color: $green-color;
+$base-color-alpha: $green-color-alpha;
+$grey: rgba(0,0,0, .1);
+
+%ff {
+    font-family: Nunito;
+    font-size: 16px;
+    font-weight: 400;
+    color: #303030;
+}
+
+@import "./members/components/buttons.scss";
+@import "./members/components/inputs.scss";
+@import "./members/components/forms.scss";
+@import "./members/typography.scss";
+@import "./members/components/alerts.scss";
+
+body {
+    background: #fff;
+    @extend %ff;
+}
+
+hr {
+    width: 100%;
+    height: 2px;
+
+    margin: 10px auto;
+    
+    border: none;
+    background: $grey;
+}

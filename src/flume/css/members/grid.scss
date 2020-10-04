@@ -1,0 +1,81 @@
+%items-to-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+
+    &.items_hor-align {
+        justify-content: center;
+    }
+    &.items_ver-align {
+        align-items: center;
+    }
+
+}
+.col {
+    display: flex;
+    flex-direction: column;
+
+    &.items_hor-align {
+        align-items: center;
+    }
+    &.items_ver-align {
+        justify-content: center;
+    }
+    
+}
+
+// Margin
+.margin-min {
+    margin: 10px !important;
+}
+.margin {
+    margin: 20px !important;
+}
+.margin-max {
+    margin: 40px !important;
+}
+// > Top
+.margin-top-min {
+    margin-top: 10px !important;
+}
+.margin-top {
+    margin-top: 20px !important;
+}
+.margin-top-max {
+    margin-top: 40px !important;
+}
+// > Bottom
+.margin-bottom-min {
+    margin-bottom: 10px !important;    
+}
+.margin-bottom {
+    margin-bottom: 20px !important;    
+}
+.margin-bottom-max {
+    margin-bottom: 40px !important;    
+}
+// > Right
+.margin-right-min {
+    margin-right: 10px !important;
+}
+.margin-right {
+    margin-right: 20px !important;
+}
+.margin-right-max {
+    margin-right: 40px !important;
+}
+// > Left
+.margin-left-min {
+    margin-left: 10px !important;
+}
+.margin-left {
+    margin-left: 20px !important;
+}
+.margin-left-max {
+    margin-left: 40px !important;
+}

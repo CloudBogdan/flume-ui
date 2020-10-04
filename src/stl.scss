@@ -1,0 +1,6 @@
+.col,
+.row {
+    &> * {
+        margin: 5px;
+    }
+}

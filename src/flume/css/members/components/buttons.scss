@@ -1,0 +1,82 @@
+$ef-color: $base-color-alpha;
+
+@import "../effects.scss";
+
+button,
+.button {
+    height: 40px;
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    background: transparent;
+    border: none;
+    border-radius: 1em;
+    @extend %ff;
+    @extend .fill;
+    @extend .outline;
+    &[fill=clear]:hover {
+        transform: translateY(-2px);
+    }
+
+    transition: .2s;
+    
+    &.fab-button {
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        
+        border-radius: 50%;
+
+        &[size=small] {
+            width: 30px;
+            height: 30px;
+        }
+
+    }
+
+    &.concentration {
+        @extend .fill:hover;
+    }
+    &[color=grey] {
+        color: #aaa;
+    }
+    &[color=blue] {
+        &:hover {
+            background: $blue-color-alpha !important;
+            color: $blue-color !important;
+            box-shadow: 0 0 0 4px $blue-color-alpha !important;
+        }
+    }
+    &[color=red] {
+        &:hover {
+            background: $red-color-alpha !important;
+            color: $red-color !important;
+            box-shadow: 0 0 0 4px $red-color-alpha !important;
+        }
+    }
+    &[color=purple] {
+        &:hover {
+            background: $purple-color-alpha !important;
+            color: $purple-color !important;
+            box-shadow: 0 0 0 4px $purple-color-alpha !important;
+        }
+    }
+    &[color=green] {
+        &:hover {
+            background: $green-color-alpha !important;
+            color: $green-color !important;
+            box-shadow: 0 0 0 4px $green-color-alpha !important;
+        }
+    }
+    
+    &:disabled {
+        color: #aaa;
+    }
+    &:not(:disabled) {
+        cursor: pointer;
+    }
+    
+}

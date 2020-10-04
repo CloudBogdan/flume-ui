@@ -1,0 +1,25 @@
+.outline {
+    &:not(:disabled):not([fill=clear]):not([fill=grey]):hover {
+        box-shadow: 0 0 0 4px $ef-color;
+        &:active {
+            box-shadow: 0 0 0 2px $ef-color;
+        }
+    }
+}
+.fill {
+    &[fill=default] {
+        background: $grey;
+    }
+    &:not(:disabled):hover {
+        &[fill=default],
+        &[fill=transparent] {
+            background: $ef-color;
+        }
+        &[fill=grey] {
+            background: $grey;
+        }
+        &:not([fill=grey]) {
+            color: $base-color;
+        }
+    }
+}
