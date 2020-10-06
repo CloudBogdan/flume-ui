@@ -1,10 +1,23 @@
-import React, { InputHTMLAttributes } from "react";
-import { CheckmarkIcon } from "./Icons";
+import React, { HTMLAttributes, InputHTMLAttributes, useEffect, useState } from "react";
+import { Button, IButton } from "./Buttons";
+import { ArrowDownIcon, CheckmarkIcon } from "./Icons";
 
 type InputType = {
     concentration?: boolean,
     need?: boolean
 }
+
+type OptionType = {
+    title: string
+    name: string
+    disabled?: boolean
+    color?: IButton["color"]
+};
+type SelectType = {
+    options: OptionType[]
+    default: null | number
+    setSelect?: (value: string)=> void
+};
 
 function createInputClass(props: React.PropsWithChildren<InputType>): string {
 
@@ -45,3 +58,49 @@ export const Radio: React.FC<InputType & InputHTMLAttributes<HTMLInputElement>> 
         </label>
     </div>
 );
+
+export const Range: React.FC<InputHTMLAttributes<HTMLInputElement>> = props=> (
+    <input
+        type="range"
+        { ...props }
+    />
+);
+
+export const Select: React.FC<SelectType & HTMLAttributes<HTMLElement>> = props=> {
+
+    const
+        [active, setActive] = useState<boolean>(false),
+        [selected, setSelected] = useState<OptionType | null>(props.default ? props.options[props.default] : null);
+    
+    return (
+        <div className={ `select ${ active ? "active" : "" } ${props.className || ""}` } { ...props }>
+            <Button onClick={ ()=> setActive(!active) }>
+                { selected ? (selected.color ? <span className={ "select-selected-color " + selected.color }>{ selected.title }</span> : selected.title) : <span className="select-default-null">null</span> }
+                <ArrowDownIcon />
+            </Button>
+            <div className="options">
+                {
+                    props.options.map((option, index)=> (
+                        <Button
+                            fill="transparent"
+                            disabled={ option.disabled }
+                            color={ option.color }
+                            className="option"
+                            key={ index }
+                            onClick={ ()=> {
+                                setSelected(option);
+                                setActive(false);
+                                if (option && props.setSelect) {
+                                    props.setSelect(option.name);
+                                    console.log(option.name)
+                                }
+                            } }
+                        >
+                            { option.title }
+                        </Button>
+                    ))
+                }
+            </div>
+        </div>
+    );
+};

@@ -1,21 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, FabButton } from "./Buttons";
 import { CrossIcon } from "./Icons";
 
 type AlertButtonType = {
     text: string
-    role?: "dismiss" | "destructive" | "close",
-    handle?: ()=> void,
-    type?: any
-}
+    role?: "dismiss" | "destructive" | "close"
+    handle?: ()=> void
+    name?: any
+};
 type AlertType = {
     is_open: boolean
     setIsOpen?: (value: boolean)=> any
     title: string
     className?: string
     buttons?: AlertButtonType[] 
-}
-
+};
+type SideAlertType = {
+    is_open: boolean
+    setIsOpen?: (value: boolean)=> any
+    timeout?: number
+    className?: string
+    swipeable?: boolean | string
+    horizontal?: "start" | "center" | "end"
+    vertical?: "top" | "center" | "bottom"
+    type?: "success" | "error" | "default" | string
+};
 
 export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, title, children, buttons })=> {
     
@@ -27,14 +36,14 @@ export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, titl
             ["dismiss", "blue"],
             ["destructive", "red"],
             ["close", "default"],
-        ]
-        
+        ];
+
         if (button.role)
-            return roles.map(role=>
-                button.role === role[0] ? role[1] : "default"
-            )[0];
-        else
-            return "default";
+            for (let i = 0; i < roles.length; i ++)
+                if (button.role === roles[i][0])
+                    return roles[i][1];
+
+        return "default";
         
     }
 
@@ -49,7 +58,13 @@ export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, titl
                     <span className="alert-title">
                         { title }
                     </span>
-                    <FabButton onClick={ ()=> setIsOpen ? setIsOpen(false) : "" } size="small" color="grey" fill="transparent">
+                    <FabButton
+                        onClick={ ()=> setIsOpen ? setIsOpen(false) : "" }
+                        size_to="small"
+                        color="red"
+                        fill="transparent"
+                        hidden
+                    >
                         <CrossIcon />
                     </FabButton>
                 </header>
@@ -61,8 +76,9 @@ export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, titl
                     buttons ?
                         <footer className="alert-buttons">
                             {
-                                buttons.map(button=>
+                                buttons.map((button, index)=>
                                     <Button
+                                        key={ index }
                                         onClick={ ()=> {
 
                                             if (button.role && setIsOpen) 
@@ -85,4 +101,52 @@ export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, titl
             </div>
         </div>
     );
+};
+export const SideAlert: React.FC<SideAlertType> = ({ children, className, is_open, setIsOpen, horizontal, vertical, type, timeout })=> {
+
+    function timeoutClose() {
+
+        if (!is_open) return;
+
+        if (!timeout || timeout === 0) return;
+
+        let t = setTimeout(()=> {
+
+            if (setIsOpen) {
+
+                setIsOpen(false);
+                clearTimeout(t);
+
+            }
+
+        }, timeout);
+
+    };
+    timeoutClose();
+
+    return (
+        <div
+            className={ `side-alert ${ className || "" } ${ is_open ? "active" : "" }`  }
+            // @ts-ignore
+            horizontal={ horizontal }
+            vertical={ vertical }
+            type={ type ? type : "default" }
+        >
+            <main className="side-alert-content">
+                { children }
+            </main>
+            <aside className="side-alert-buttons">
+                <FabButton
+                    color={
+                        type === "default" ? "default" : ( type === "error" ? "red" : ( type === "success" ? "blue" : "default" ) )
+                    }
+                    fill="transparent" onClick={ ()=> setIsOpen ? setIsOpen(false) : "" }
+                    size_to="small"
+                    hidden
+                >
+                    <CrossIcon />
+                </FabButton>
+            </aside>
+        </div>
+    )
 };

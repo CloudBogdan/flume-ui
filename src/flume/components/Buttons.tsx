@@ -1,21 +1,23 @@
 import React, { ButtonHTMLAttributes } from "react";
 
-type ButtonType = {
+export interface IButton {
     children?: any
 
     fill?: "outline" | "default" | "transparent" | "clear" | "grey"
     concentration?: boolean | string
     priority?: boolean | string
-    size?: "small"
-    color?: "grey" | "blue" | "puple" | "red" | "default"
+    size_to?: "small"
+    color?: "blue" | "puple" | "red" | "default"
+    hidden?: boolean | string
 };
 
-function createButtonClass(props: React.PropsWithChildren<ButtonType>): string {
+function createButtonClass(props: React.PropsWithChildren<IButton>): string {
 
     
     const classes: string[] = [
         "concentration",
-        "priority"
+        "priority",
+        "hidden"
     ];
     let class_result: string = "";
     
@@ -27,14 +29,14 @@ function createButtonClass(props: React.PropsWithChildren<ButtonType>): string {
 
 }
 
-export const Button: React.FC<ButtonType & ButtonHTMLAttributes<HTMLButtonElement>> = props=> (
+export const Button: React.FC<IButton & ButtonHTMLAttributes<HTMLButtonElement>> = props=> (
     // @ts-ignore
     <button className={ createButtonClass(props) } fill={ props.fill || "default" } { ...props }>
         { props.children }
     </button>
 );
 
-export const FabButton: React.FC<ButtonType & ButtonHTMLAttributes<HTMLButtonElement>> = props=> (
+export const FabButton: React.FC<IButton & ButtonHTMLAttributes<HTMLButtonElement>> = props=> (
     // @ts-ignore
     <button className={ `fab-button ${ createButtonClass(props) }` } fill={ props.fill || "default" } { ...props }>
         { props.children }

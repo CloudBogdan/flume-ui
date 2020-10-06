@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import "./stl.scss";
 //
 import {
-    Button, Checkbox, FabButton, Form, TextInput, Item, Radio, ItemInputsGroup, Col, Row, FormTitle, Alert
+    Button, Checkbox, FabButton, Form, TextInput, Item, Radio, ItemInputsGroup, Col, Row, FormTitle, Alert, SideAlert, Range, Select
 } from "./flume/main";
 
 const App: React.FC = ()=> {
 
-    const [alert_show, setAlertShow] = useState<boolean>(false);
+    const 
+        [alert_show, setAlertShow] = useState<boolean>(false),
+        [side_alert_show, setSideAlertShow] = useState<boolean>(false);
+    const
+        [side_alert_timeout, setSideAlertTimeout] = useState<number>(3000),
+        [side_alert_type, setSideAlertType] = useState<string>("default");
 
     return (
         <div className="app">
@@ -19,37 +24,24 @@ const App: React.FC = ()=> {
                 buttons={ [
                     {
                         text: "Yes",
-                        type: "yes",
-                        role: "close",
-                        handle() {
-
-                            console.log(this.type);
-                            
-                        }
+                        role: "close"
                     },
                     {
                         text: "No",
-                        role: "destructive",
-                        handle() {
-
-                            console.log(this.type);
-                            
-                        }
+                        role: "destructive"
                     },
                     {
                         text: "Cancel",
-                        role: "dismiss",
-                        handle() {
-
-                            console.log(this.type);
-                            
-                        }
+                        role: "dismiss"
                     }
                 ] }
             >
                 hello
             </Alert>
-            
+            <SideAlert timeout={ side_alert_timeout } type={ side_alert_type } horizontal="end" vertical="bottom" is_open={ side_alert_show } setIsOpen={ setSideAlertShow }>
+                Side alert
+            </SideAlert>
+
             <Col>
                 <Row>
 
@@ -61,7 +53,7 @@ const App: React.FC = ()=> {
                             <FabButton>
                                 Fab
                             </FabButton>
-                            <Button disabled>
+                            <Button disabled={ true }>
                                 Button disabled
                             </Button>
                             <FabButton disabled>
@@ -111,7 +103,9 @@ const App: React.FC = ()=> {
                                     <TextInput placeholder="hello" />
                                 </Item>
                                 <TextInput concentration placeholder="hello" />
-                                <TextInput disabled placeholder="hello" />
+                                <TextInput className="margin-bottom" disabled placeholder="hello" />
+                                <Range className="margin-bottom" step="1" min="0" max="100" />
+                                <Range step="1" min="0" max="100" disabled />
                             </Col>
                             <Col>
                                 <Row>
@@ -153,7 +147,7 @@ const App: React.FC = ()=> {
                 </Row>
                 <Col>
 
-                    <Form className="margin-bottom-max" onSubmit={ e=> e.preventDefault() } width="400px" align="horizontal">
+                    <Form className="margin-bottom" onSubmit={ e=> e.preventDefault() } width="400px" align="horizontal">
                         <FormTitle className="text-to-center">
                             Form
                         </FormTitle>
@@ -166,21 +160,48 @@ const App: React.FC = ()=> {
                         </Item>
                         <Item row>
                             <label>Your age:</label>
-                            <TextInput type="email" />
+                            <TextInput type="number" />
                         </Item>
-                        <Row>
+                        <Item row>
                             <Button priority concentration >
                                 Register
                             </Button>
                             <Button fill="transparent">
                                 Login
                             </Button>
-                        </Row>
+                        </Item>
                     </Form>
                     
-                    <Button onClick={ ()=> setAlertShow(true) } concentration>
+                    <Button className="margin-bottom" onClick={ ()=> setAlertShow(true) } concentration>
                         Show alert
                     </Button>
+                    <Form width="400px" align="horizontal" onSubmit={ e=> e.preventDefault() }>
+                        <FormTitle className="text-to-center">
+                            Side alert params
+                        </FormTitle>
+                        <Item row>
+                            <label>Timeout:</label>
+                            <TextInput type="number" value={ side_alert_timeout } onChange={ e=> setSideAlertTimeout(+e.target.value) } />
+                        </Item>
+                        <Item row>
+                            <label>Type:</label>
+                            <Select
+                                setSelect={ setSideAlertType }
+                                options={ [
+                                    { title: "Default", name: "default" },
+                                    { title: "Error", color: "red", name: "error" },
+                                    { title: "Success", color: "blue", name: "success" },
+                                    { title: "Any", disabled: true, name: "any" },
+                                ] }
+                                default={ 0 }
+                            />
+                        </Item>
+                        <Item>
+                            <Button onClick={ ()=> setSideAlertShow(true) } concentration>
+                                Show side alert
+                            </Button>
+                        </Item>
+                    </Form>
 
                 </Col>
             </Col>

@@ -6,7 +6,6 @@ $ef-color: $base-color-alpha;
 input[type=text],
 input[type=password], 
 input[type=email], 
-input[type=login], 
 input[type=number] {
     width: 100%;
     height: 40px;
@@ -217,4 +216,113 @@ input[type=number] {
     30% {
         transform: translateY(-2px);
     }
+}
+
+// Range
+input[type=range] {
+    width: 100%;
+    height: 2px;
+    
+    background: $base-color-alpha;
+    
+    appearance: none;
+    transition: .2s;
+    
+    &::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+
+        background: $base-color;
+        border-radius: 50%;
+        @extend .outline;
+        
+        appearance: none;
+        cursor: pointer;
+        transition: .2s;
+    }
+    
+    &:disabled {
+        background: $grey;
+
+        &::-webkit-slider-thumb {
+            width: 16px;
+            height: 16px;
+
+            background: #aaa;
+        }
+
+    }
+
+}
+
+// Select
+.select {
+    width: 100%;
+
+    .options {
+        width: 100%;
+        padding: 5px;
+
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        z-index: -999;
+        transform: scale(.8);
+
+        border-radius: 1.2em;
+        background: rgba(0, 0, 0, .03);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+
+        transition: .2s;
+
+        .option {
+            box-shadow: none !important;
+            border-radius: .3em;
+
+            &:first-child {
+                border-radius: 1em 1em .3em .3em;
+            }
+            &:last-child {
+                border-radius: .3em .3em 1em 1em;
+            }
+
+        }
+
+    }
+
+    &.active {
+        .options {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 55;
+        }
+    }
+
+    button {
+        width: 100%;
+        justify-content: space-between;
+
+        .select-selected-color {
+            &.red {
+                color: $red-color;
+            }
+            &.blue {
+                color: $blue-color;
+            }
+            &.purple {
+                color: $purple-color;
+            }
+            &.green {
+                color: $green-color;
+            }
+        }
+        
+    }
+    .select-default-null {
+        color: rgba(0, 0, 0, .5);
+        font-style: italic;
+    }
+
 }

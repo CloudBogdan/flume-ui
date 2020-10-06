@@ -80,3 +80,108 @@
     }
 
 }
+.side-alert {
+    min-width: 300px;
+
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    z-index: -999;
+    display: flex;
+    align-items: center;
+    transform: translateX(50%);
+    
+    background: #fff;
+    border-radius: 1em;
+    opacity: 0;
+    border: 2px solid $grey;
+    
+    transition: .3s;
+    
+    .side-alert-content {
+        width: 100%;
+        padding: 15px 20px;
+        
+        display: flex;
+        align-items: center;
+    }
+    .side-alert-buttons {
+        padding: 15px;
+        
+        display: flex;
+        align-items: center;
+    }
+    
+    &[type=error] {
+        border: 2px solid $red-color-alpha;
+        color: $red-color;
+        font-weight: 800;
+    }
+    &[type=success] {
+        border: 2px solid $blue-color-alpha;
+        color: $blue-color;
+        font-weight: 800;
+    }
+    
+    // Align
+    &[horizontal=start] {
+        left: 0;
+        right: initial;
+        flex-direction: row-reverse;
+        transform: translate(-50%, 0);
+
+        .side-alert-content {
+            flex-direction: row-reverse;
+        }
+
+    }
+    &[horizontal=center] {
+        left: 50%;
+        right: initial;
+        transform: translate(-50%, 100%);
+        
+        &[vertical=top] {
+            transform: translate(-50%, -100%);
+        }
+
+    }
+    &[horizontal=end] {
+        left: initial;
+        right: 0;
+        transform: translate(50%, 0);
+    }
+
+    &[vertical=top] {
+        top: 0;
+        bottom: initial;
+    }
+    &[vertical=center] {
+        top: 50%;
+        bottom: initial;
+    }
+    &[vertical=bottom] {
+        top: initial;
+        bottom: 0;
+    }
+
+    &.active {
+        opacity: 1;
+        transform: translate(0, 0);
+        z-index: 999;
+        
+        &[horizontal=center] {
+            transform: translateX(-50%);
+        }
+
+    }
+    &:active {
+        &[type=error] {
+            box-shadow: 0 0 0 4px $red-color-alpha;
+        }
+        &[type=success] {
+            box-shadow: 0 0 0 4px $blue-color-alpha;
+        }
+    }
+
+}

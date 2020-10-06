@@ -1,8 +1,36 @@
 .outline {
     &:not(:disabled):not([fill=clear]):not([fill=grey]):hover {
-        box-shadow: 0 0 0 4px $ef-color;
+        box-shadow: 0 0 0 4px $base-color-alpha;
+
+        &[color=blue] {
+            box-shadow: 0 0 0 4px $blue-color-alpha;
+        }
+        &[color=red] {
+            box-shadow: 0 0 0 4px $red-color-alpha;
+        }
+        &[color=purple] {
+            box-shadow: 0 0 0 4px $purple-color-alpha;
+        }
+        &[color=green] {
+            box-shadow: 0 0 0 4px $green-color-alpha;
+        }
+        
         &:active {
-            box-shadow: 0 0 0 2px $ef-color;
+            box-shadow: 0 0 0 2px $base-color-alpha;
+
+            &[color=blue] {
+                box-shadow: 0 0 0 2px $blue-color-alpha;
+            }
+            &[color=red] {
+                box-shadow: 0 0 0 2px $red-color-alpha;
+            }
+            &[color=purple] {
+                box-shadow: 0 0 0 2px $purple-color-alpha;
+            }
+            &[color=green] {
+                box-shadow: 0 0 0 2px $green-color-alpha;
+            }
+
         }
     }
 }
@@ -13,13 +41,41 @@
     &:not(:disabled):hover {
         &[fill=default],
         &[fill=transparent] {
-            background: $ef-color;
+            background: $base-color-alpha;
+
+            &[color=blue] {
+                background: $blue-color-alpha;
+            }
+            &[color=red] {
+                background: $red-color-alpha;
+            }
+            &[color=purple] {
+                background: $purple-color-alpha;
+            }
+            &[color=green] {
+                background: $green-color-alpha;
+            }
+
         }
         &[fill=grey] {
             background: $grey;
         }
         &:not([fill=grey]) {
             color: $base-color;
+
+            &[color=blue] {
+                color: $blue-color;
+            }
+            &[color=red] {
+                color: $red-color;
+            }
+            &[color=purple] {
+                color: $purple-color;
+            }
+            &[color=green] {
+                color: $green-color;
+            }
+
         }
     }
 }

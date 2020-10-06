@@ -30,7 +30,7 @@ button,
         
         border-radius: 50%;
 
-        &[size=small] {
+        &[size_to=small] {
             width: 30px;
             height: 30px;
         }
@@ -40,36 +40,8 @@ button,
     &.concentration {
         @extend .fill:hover;
     }
-    &[color=grey] {
+    &.hidden {
         color: #aaa;
-    }
-    &[color=blue] {
-        &:hover {
-            background: $blue-color-alpha !important;
-            color: $blue-color !important;
-            box-shadow: 0 0 0 4px $blue-color-alpha !important;
-        }
-    }
-    &[color=red] {
-        &:hover {
-            background: $red-color-alpha !important;
-            color: $red-color !important;
-            box-shadow: 0 0 0 4px $red-color-alpha !important;
-        }
-    }
-    &[color=purple] {
-        &:hover {
-            background: $purple-color-alpha !important;
-            color: $purple-color !important;
-            box-shadow: 0 0 0 4px $purple-color-alpha !important;
-        }
-    }
-    &[color=green] {
-        &:hover {
-            background: $green-color-alpha !important;
-            color: $green-color !important;
-            box-shadow: 0 0 0 4px $green-color-alpha !important;
-        }
     }
     
     &:disabled {
@@ -77,6 +49,17 @@ button,
     }
     &:not(:disabled) {
         cursor: pointer;
+    }
+
+    &:not(.fab-button) {
+        .icon {
+            &:first-child {
+                margin-right: 10px;
+            }
+            &:last-child {
+                margin-left: 10px;
+            }
+        }
     }
     
 }
