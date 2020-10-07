@@ -1,7 +1,7 @@
 import React, { FormHTMLAttributes, HTMLAttributes } from "react";
 
 interface IGridness {
-    row?: boolean
+    row?: boolean | string
 };
 interface IForm {
     width?: string

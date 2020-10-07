@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Button, FabButton } from "./Buttons";
 import { CrossIcon } from "./Icons";
 
@@ -6,7 +6,7 @@ type AlertButtonType = {
     text: string
     role?: "dismiss" | "destructive" | "close"
     handle?: ()=> void
-    name?: any
+    value?: any
 };
 type AlertType = {
     is_open: boolean
@@ -23,7 +23,7 @@ type SideAlertType = {
     swipeable?: boolean | string
     horizontal?: "start" | "center" | "end"
     vertical?: "top" | "center" | "bottom"
-    type?: "success" | "error" | "default" | string
+    type?: "success" | "error" | "default"
 };
 
 export const Alert: React.FC<AlertType> = ({ className, is_open, setIsOpen, title, children, buttons })=> {

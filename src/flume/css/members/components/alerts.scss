@@ -92,10 +92,10 @@
     align-items: center;
     transform: translateX(50%);
     
-    background: #fff;
+    background: $grey;
+    backdrop-filter: blur(10px);
     border-radius: 1em;
     opacity: 0;
-    border: 2px solid $grey;
     
     transition: .3s;
     
@@ -114,12 +114,12 @@
     }
     
     &[type=error] {
-        border: 2px solid $red-color-alpha;
+        background: $red-color-alpha;
         color: $red-color;
         font-weight: 800;
     }
     &[type=success] {
-        border: 2px solid $blue-color-alpha;
+        background: $blue-color-alpha;
         color: $blue-color;
         font-weight: 800;
     }

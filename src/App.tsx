@@ -12,7 +12,9 @@ const App: React.FC = ()=> {
         [side_alert_show, setSideAlertShow] = useState<boolean>(false);
     const
         [side_alert_timeout, setSideAlertTimeout] = useState<number>(3000),
-        [side_alert_type, setSideAlertType] = useState<string>("default");
+        [side_alert_type, setSideAlertType] = useState<any>("default"),
+        [side_alert_horizontal, setSideAlertHorizontal] = useState<any>("default"),
+        [side_alert_vertical, setSideAlertVertical] = useState<any>("default");
 
     return (
         <div className="app">
@@ -38,7 +40,7 @@ const App: React.FC = ()=> {
             >
                 hello
             </Alert>
-            <SideAlert timeout={ side_alert_timeout } type={ side_alert_type } horizontal="end" vertical="bottom" is_open={ side_alert_show } setIsOpen={ setSideAlertShow }>
+            <SideAlert timeout={ side_alert_timeout } type={ side_alert_type } horizontal={ side_alert_horizontal } vertical={ side_alert_vertical } is_open={ side_alert_show } setIsOpen={ setSideAlertShow }>
                 Side alert
             </SideAlert>
 
@@ -53,7 +55,7 @@ const App: React.FC = ()=> {
                             <FabButton>
                                 Fab
                             </FabButton>
-                            <Button disabled={ true }>
+                            <Button disabled>
                                 Button disabled
                             </Button>
                             <FabButton disabled>
@@ -102,32 +104,32 @@ const App: React.FC = ()=> {
                                     </label>
                                     <TextInput placeholder="hello" />
                                 </Item>
-                                <TextInput concentration placeholder="hello" />
+                                <TextInput concentration="c" placeholder="hello" />
                                 <TextInput className="margin-bottom" disabled placeholder="hello" />
                                 <Range className="margin-bottom" step="1" min="0" max="100" />
                                 <Range step="1" min="0" max="100" disabled />
                             </Col>
                             <Col>
                                 <Row>
-                                    <Item row>
+                                    <Item row="r">
                                         <label>
                                             Yes
                                         </label>
                                         <Checkbox />
                                     </Item>
-                                    <Item row>
+                                    <Item row="r">
                                         <label>
                                             Yes
                                         </label>
-                                        <Checkbox concentration />
+                                        <Checkbox concentration="c" />
                                     </Item>
-                                    <Item row>
+                                    <Item row="r">
                                         <label>
                                             No
                                         </label>
                                         <Checkbox checked disabled />
                                     </Item>
-                                    <Item row>
+                                    <Item row="r">
                                         <label>
                                             Maybe
                                         </label>
@@ -158,12 +160,12 @@ const App: React.FC = ()=> {
                                 <TextInput placeholder="Last" />
                             </ItemInputsGroup>
                         </Item>
-                        <Item row>
+                        <Item row="r">
                             <label>Your age:</label>
                             <TextInput type="number" />
                         </Item>
-                        <Item row>
-                            <Button priority concentration >
+                        <Item row="r">
+                            <Button priority="p" concentration="c" >
                                 Register
                             </Button>
                             <Button fill="transparent">
@@ -172,32 +174,61 @@ const App: React.FC = ()=> {
                         </Item>
                     </Form>
                     
-                    <Button className="margin-bottom" onClick={ ()=> setAlertShow(true) } concentration>
+                    <Button className="margin-bottom" onClick={ ()=> setAlertShow(true) } concentration="c">
                         Show alert
                     </Button>
                     <Form width="400px" align="horizontal" onSubmit={ e=> e.preventDefault() }>
                         <FormTitle className="text-to-center">
                             Side alert params
                         </FormTitle>
-                        <Item row>
+                        <Item row="r">
                             <label>Timeout:</label>
                             <TextInput type="number" value={ side_alert_timeout } onChange={ e=> setSideAlertTimeout(+e.target.value) } />
                         </Item>
-                        <Item row>
+                        <Item row="r">
+                            <label>Horizontal:</label>
+                            <Select
+                                fill="transparent"
+                                setSelect={ setSideAlertHorizontal }
+                                options={ [
+                                    { title: "Start", value: "start" },
+                                    { title: "Center", value: "center" },
+                                    { title: "End", value: "end" },
+                                    { title: "In world's ass", disabled: true, value: "any" },
+                                ] }
+                                default={ 2 }
+                            />
+                        </Item>
+                        <Item row="r">
+                            <label>Vertical:</label>
+                            <Select
+                                fill="transparent"
+                                setSelect={ setSideAlertVertical }
+                                options={ [
+                                    { title: "Top", value: "top" },
+                                    { title: "Center", value: "center" },
+                                    { title: "Bottom", value: "bottom" },
+                                    { title: "In world's ass", disabled: true, value: "any" },
+                                ] }
+                                default={ 2 }
+                            />
+                        </Item>
+                        <Item row="r">
                             <label>Type:</label>
                             <Select
+                                fill="transparent"
                                 setSelect={ setSideAlertType }
                                 options={ [
-                                    { title: "Default", name: "default" },
-                                    { title: "Error", color: "red", name: "error" },
-                                    { title: "Success", color: "blue", name: "success" },
-                                    { title: "Any", disabled: true, name: "any" },
+                                    { title: "Default", value: "default" },
+                                    { title: "Error", color: "red", value: "error" },
+                                    { title: "Success", color: "blue", value: "success" },
+                                    { title: "Any", disabled: true, value: "any" },
                                 ] }
                                 default={ 0 }
                             />
                         </Item>
                         <Item>
-                            <Button onClick={ ()=> setSideAlertShow(true) } concentration>
+                            <Button onClick={ ()=> setSideAlertShow(true) } concentration="c">
                                 Show side alert
                             </Button>
                         </Item>

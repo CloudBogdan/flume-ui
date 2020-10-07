@@ -33,6 +33,10 @@ input[type=number] {
     }
     &:disabled {
         border: 2px solid $grey;
+        color: #aaa !important;
+    }
+    &::placeholder {
+        font-style: italic;
     }
 
 }
@@ -229,8 +233,8 @@ input[type=range] {
     transition: .2s;
     
     &::-webkit-slider-thumb {
-        width: 20px;
-        height: 20px;
+        width: 16px;
+        height: 16px;
 
         background: $base-color;
         border-radius: 50%;
@@ -245,9 +249,6 @@ input[type=range] {
         background: $grey;
 
         &::-webkit-slider-thumb {
-            width: 16px;
-            height: 16px;
-
             background: #aaa;
         }
 
@@ -271,7 +272,7 @@ input[type=range] {
         transform: scale(.8);
 
         border-radius: 1.2em;
-        background: rgba(0, 0, 0, .03);
+        background: rgba(0, 0, 0, .05);
         backdrop-filter: blur(10px);
         opacity: 0;
 
@@ -298,6 +299,9 @@ input[type=range] {
             transform: scale(1);
             z-index: 55;
         }
+        button .icon {
+            transform: rotate(-180deg);
+        }
     }
 
     button {
@@ -317,6 +321,9 @@ input[type=range] {
             &.green {
                 color: $green-color;
             }
+        }
+        .icon {
+            transition: .2s;
         }
         
     }

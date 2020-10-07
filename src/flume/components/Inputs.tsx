@@ -3,13 +3,13 @@ import { Button, IButton } from "./Buttons";
 import { ArrowDownIcon, CheckmarkIcon } from "./Icons";
 
 type InputType = {
-    concentration?: boolean,
-    need?: boolean
+    concentration?: boolean | string,
+    need?: boolean | string
 }
 
 type OptionType = {
     title: string
-    name: string
+    value: any
     disabled?: boolean
     color?: IButton["color"]
 };
@@ -17,6 +17,7 @@ type SelectType = {
     options: OptionType[]
     default: null | number
     setSelect?: (value: string)=> void
+    fill?: IButton["fill"]
 };
 
 function createInputClass(props: React.PropsWithChildren<InputType>): string {
@@ -70,11 +71,11 @@ export const Select: React.FC<SelectType & HTMLAttributes<HTMLElement>> = props=
 
     const
         [active, setActive] = useState<boolean>(false),
-        [selected, setSelected] = useState<OptionType | null>(props.default ? props.options[props.default] : null);
+        [selected, setSelected] = useState<OptionType | null>((props.default !== null && props.default !== undefined) ? props.options[props.default] : null);
     
     return (
-        <div className={ `select ${ active ? "active" : "" } ${props.className || ""}` } { ...props }>
-            <Button onClick={ ()=> setActive(!active) }>
+        <div className={ `select ${ active ? "active" : "" } ${props.className || ""}` }>
+            <Button fill={ props.fill || "default" } onClick={ ()=> setActive(!active) }>
                 { selected ? (selected.color ? <span className={ "select-selected-color " + selected.color }>{ selected.title }</span> : selected.title) : <span className="select-default-null">null</span> }
                 <ArrowDownIcon />
             </Button>
@@ -90,10 +91,8 @@ export const Select: React.FC<SelectType & HTMLAttributes<HTMLElement>> = props=
                             onClick={ ()=> {
                                 setSelected(option);
                                 setActive(false);
-                                if (option && props.setSelect) {
-                                    props.setSelect(option.name);
-                                    console.log(option.name)
-                                }
+                                if (props.setSelect)
+                                    props.setSelect(option.value);
                             } }
                         >
                             { option.title }
