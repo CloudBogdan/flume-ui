@@ -175,13 +175,5 @@
         }
 
     }
-    &:active {
-        &[type=error] {
-            box-shadow: 0 0 0 4px $red-color-alpha;
-        }
-        &[type=success] {
-            box-shadow: 0 0 0 4px $blue-color-alpha;
-        }
-    }
 
 }

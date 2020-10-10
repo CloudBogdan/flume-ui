@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./stl.scss";
 //
 import {
-    Button, Checkbox, FabButton, Form, TextInput, Item, Radio, ItemInputsGroup, Col, Row, FormTitle, Alert, SideAlert, Range, Select
-} from "./flume/main";
+    Button, Checkbox, FabButton, Form, TextInput, Item, Radio, ItemInputsGroup, Col, Row, FormTitle, Alert, SideAlert, Range, Select, Card, CardTitle, CardHeader, CardSubtitle, CardContent
+} from "./flume/core";
 
 const App: React.FC = ()=> {
 
@@ -177,7 +177,7 @@ const App: React.FC = ()=> {
                     <Button className="margin-bottom" onClick={ ()=> setAlertShow(true) } concentration="c">
                         Show alert
                     </Button>
-                    <Form width="400px" align="horizontal" onSubmit={ e=> e.preventDefault() }>
+                    <Form width="400px" align="horizontal" className="margin-bottom" onSubmit={ e=> e.preventDefault() }>
                         <FormTitle className="text-to-center">
                             Side alert params
                         </FormTitle>
@@ -233,6 +233,71 @@ const App: React.FC = ()=> {
                             </Button>
                         </Item>
                     </Form>
+
+                    <Row>
+                        
+                        <Card width="300px">
+                            <CardHeader>
+                                <span>
+                                    <CardTitle>
+                                        Card default
+                                    </CardTitle>
+                                    <CardSubtitle>
+                                        Card subtitle
+                                    </CardSubtitle>
+                                </span>
+                            </CardHeader>
+                            <CardContent>
+                                Card content
+                            </CardContent>
+                        </Card>
+                        <Card width="300px" color="error">
+                            <CardHeader>
+                                <span>
+                                    <CardTitle>
+                                        Card error
+                                    </CardTitle>
+                                    <CardSubtitle>
+                                        Card subtitle
+                                    </CardSubtitle>
+                                </span>
+                            </CardHeader>
+                            <CardContent>
+                                Card content
+                            </CardContent>
+                        </Card>
+                        <Card width="300px" color="success">
+                            <CardHeader>
+                                <span>
+                                    <CardTitle>
+                                        Card cuccess
+                                    </CardTitle>
+                                    <CardSubtitle>
+                                        Card subtitle
+                                    </CardSubtitle>
+                                </span>
+                            </CardHeader>
+                            <CardContent>
+                                Card content
+                            </CardContent>
+                        </Card>
+                        <Card width="300px" color="transparent">
+                            <CardHeader>
+                                <span>
+                                    <CardTitle>
+                                        Card transparent
+                                    </CardTitle>
+                                    <CardSubtitle>
+                                        Card subtitle
+                                    </CardSubtitle>
+                                </span>
+                            </CardHeader>
+                            <CardContent>
+                                Card content
+                            </CardContent>
+                        </Card>
+
+                    </Row>
 
                 </Col>
             </Col>
